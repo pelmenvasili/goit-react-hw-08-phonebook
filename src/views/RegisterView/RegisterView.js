@@ -59,6 +59,8 @@ export default function RegisterView() {
             value={password}
             onChange={handleChange}
             className={css.input}
+            minLength={7}
+            title="Password must be at least 7 characters long" 
           />
         </label>
 

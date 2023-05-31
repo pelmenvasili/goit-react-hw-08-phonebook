@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import operations from '../redux/auth/auth-operations';
+import operations from '../../redux/auth/auth-operations';
 import css from './LoginView.module.css';
-import { Navigate } from 'react-router-dom';
 
-export default function RegisterView() {
+
+export default function LoginView() {
   const dispatch = useDispatch();
-  const [redirectToContacts, setRedirectToContacts] = useState(false);
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case 'name':
-        return setName(value);
       case 'email':
         return setEmail(value);
       case 'password':
@@ -26,27 +22,17 @@ export default function RegisterView() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(operations.register({ name, email, password }));
-    setRedirectToContacts(true);
-    setName('');
+    dispatch(operations.logIn({ email, password }));
     setEmail('');
     setPassword('');
   };
 
-  if (redirectToContacts) {
-    return <Navigate to="/contacts" replace />;
-  }
 
   return (
     <div className={css.container}>
-      <h1>Registration page</h1>
+      <h1>Login page</h1>
 
       <form onSubmit={handleSubmit} autoComplete="off" className={css.form}>
-        <label>
-          Name
-          <input type="text" name="name" value={name} onChange={handleChange} className={css.input} />
-        </label>
-
         <label>
           Email
           <input
@@ -69,7 +55,7 @@ export default function RegisterView() {
           />
         </label>
 
-        <button type="submit" className={css.button}>Register</button>
+        <button type="submit" className={css.button}>Sign in</button>
       </form>
     </div>
   );

@@ -1,10 +1,17 @@
 import ContactListItem from 'components/ContactListItem/ContactListItem';
 import css from './ContactList.module.css';
 import { useSelector } from 'react-redux';
-import { selectSortedContacts } from '../../redux/contacts/contacts-selectors';
+import { selectSortedContacts, selectIsLoading  } from '../../redux/contacts/contacts-selectors';
+import Loader from 'components/Loader/Loader';
 
 const ContactList = () => {
-const filteredContacts = useSelector(state => selectSortedContacts(state));
+  const filteredContacts = useSelector(state => selectSortedContacts(state));
+  const isLoading = useSelector(selectIsLoading);
+
+  
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <ul className={css.contactList}>

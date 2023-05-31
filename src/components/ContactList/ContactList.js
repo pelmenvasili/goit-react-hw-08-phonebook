@@ -7,7 +7,6 @@ import Loader from 'components/Loader/Loader';
 const ContactList = () => {
   const filteredContacts = useSelector(state => selectSortedContacts(state));
   const isLoading = useSelector(selectIsLoading);
-
   
   if (isLoading) {
     return <Loader />;
